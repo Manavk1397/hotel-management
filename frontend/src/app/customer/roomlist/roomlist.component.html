@@ -1,1 +1,15 @@
-<p>roomlist works!</p>
+<h2>Available Rooms</h2>
+
+<div style="border: 1px solid blue; padding: 10px; margin-bottom: 10px;">
+  <h3>{{ room1Type }}</h3>
+  <p>Price: ₹{{ room1Price }}</p>
+  <p>Available: {{ room1Count }}</p>
+  <button (click)="bookRoom1()">Book Now</button>
+</div>
+
+<div style="border: 1px solid blue; padding: 10px;">
+  <h3>{{ room2Type }}</h3>
+  <p>Price: ₹{{ room2Price }}</p>
+  <p>Available: {{ room2Count }}</p>
+  <button>Book Now</button>
+</div> 
