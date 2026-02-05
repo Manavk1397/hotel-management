@@ -1,6 +1,27 @@
-<nav style="padding: 1rem; background: #eee; display: flex; gap: 10px;">
-  <a routerLink="/auth/login">Login</a>
-  <a routerLink="/customer/rooms">Rooms</a>
+<nav style="display: flex; justify-content: space-between; padding: 10px; background: #eee;">
+  <strong>Hotel Management</strong>
+
+  <div>
+    <span *ngIf="currentRole === 'guest'">
+      <a routerLink="/auth/login">Login</a> | 
+      <a routerLink="/auth/register">Register</a>
+    </span>
+
+    <span *ngIf="currentRole === 'admin'">
+      <a routerLink="/admin/manage-rooms">Manage Rooms</a> | 
+      <button (click)="logout()">Logout</button>
+    </span>
+
+    <span *ngIf="currentRole === 'customer'">
+      <a routerLink="/customer/rooms">Rooms</a> | 
+      <a routerLink="/customer/history">History</a> | 
+      <button (click)="logout()">Logout</button>
+    </span>
+  </div>
 </nav>
 
 <router-outlet></router-outlet>
+
+<footer style="text-align: center; padding: 20px; border-top: 1px solid #ccc;">
+  <p>Hotel Management System © 2026</p>
+</footer>

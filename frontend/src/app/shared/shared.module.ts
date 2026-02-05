@@ -14,6 +14,11 @@ import { RoomcardComponent } from './roomcard/roomcard.component';
   ],
   imports: [
     CommonModule
+  ],
+  exports: [
+    NavbarComponent,
+    FooterComponent,
+    RoomcardComponent
   ]
 })
 export class SharedModule { }
