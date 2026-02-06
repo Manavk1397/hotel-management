@@ -2,19 +2,12 @@
 
 <div style="display: flex; flex-wrap: wrap;">
   
-  <div style="margin: 10px; text-align: center;">
-    <app-roomcard></app-roomcard> <h3>{{ room1Type }}</h3>
-    <p>Price: ₹{{ room1Price }}</p>
-    <p>Available: {{ room1Count }}</p>
-    <button (click)="bookRoom1()">Book Now</button>
-  </div>
-
-  <div style="margin: 10px; text-align: center;">
+  <div *ngFor="let room of rooms; let i = index" style="margin: 10px; text-align: center;">
     <app-roomcard></app-roomcard>
-    <h3>{{ room2Type }}</h3>
-    <p>Price: ₹{{ room2Price }}</p>
-    <p>Available: {{ room2Count }}</p>
-    <button>Book Now</button>
+    <h3>{{ room.type }}</h3>
+    <p>Price: ₹{{ room.price }}</p>
+    <p>Available: {{ room.count }}</p>
+    <button (click)="bookRoom(i)" [disabled]="room.count === 0">Book Now</button>
   </div>
 
 </div>

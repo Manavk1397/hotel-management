@@ -1,22 +1,28 @@
 import { Component } from '@angular/core';
 
+interface Room {
+  type: string;
+  price: number;
+  count: number;
+}
+
 @Component({
   selector: 'app-roomlist',
   templateUrl: './roomlist.component.html',
   styleUrls: ['./roomlist.component.css']
 })
 export class RoomlistComponent {
-// Using basic variables and arrays
-  room1Type = 'Deluxe Room';
-  room1Price = 2500;
-  room1Count = 5;
+    rooms: Room[] = [
+    { type: 'Deluxe Room', price: 2500, count: 5 },
+    { type: 'Executive Suite', price: 5000, count: 2 }
+  ];
 
-  room2Type = 'Executive Suite';
-  room2Price = 5000;
-  room2Count = 2;
-
-  bookRoom1() {
-    this.room1Count = this.room1Count - 1;
-    alert('Booking Successful for Deluxe!');
-}
+  bookRoom(index: number) {
+    if (this.rooms[index].count > 0) {
+      this.rooms[index].count--;
+      alert(`Booking Successful for ${this.rooms[index].type}!`);
+    } else {
+      alert(`Sorry, ${this.rooms[index].type} is not available.`);
+    }
+  }
 }
