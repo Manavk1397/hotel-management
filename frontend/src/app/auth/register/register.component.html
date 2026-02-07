@@ -1,1 +1,24 @@
-<p>register works!</p>
+<div style="padding: 20px; border: 1px solid #ccc; width: 350px; margin: auto; margin-top: 50px;">
+  <h2>Customer Registration</h2>
+  <form #regForm="ngForm" (ngSubmit)="onRegister(regForm)">
+    
+    <p>Full Name: <br>
+      <input type="text" name="fullName" ngModel required #nameRef="ngModel">
+      <span *ngIf="nameRef.invalid && nameRef.touched" style="color: red; font-size: 12px;">Name is required</span>
+    </p>
+
+    <p>Email: <br>
+      <input type="email" name="email" ngModel required email #emailRef="ngModel">
+      <span *ngIf="emailRef.invalid && emailRef.touched" style="color: red; font-size: 12px;">Valid email is required</span>
+    </p>
+
+    <p>Password: <br>
+      <input type="password" name="password" ngModel required minlength="6" #passRef="ngModel">
+      <span *ngIf="passRef.invalid && passRef.touched" style="color: red; font-size: 12px;">Password (min 6 chars) required</span>
+    </p>
+
+    <button type="submit" [disabled]="regForm.invalid">Register</button>
+  </form>
+
+  <p><a routerLink="/auth/login">Already have an account? Login</a></p>
+</div>
