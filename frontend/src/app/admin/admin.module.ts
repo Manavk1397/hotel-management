@@ -4,6 +4,8 @@ import { CommonModule } from '@angular/common';
 import { AdminRoutingModule } from './admin-routing.module';
 import { DashboardComponent } from './dashboard/dashboard.component';
 import { ManageroomsComponent } from './managerooms/managerooms.component';
+import { RoomcardComponent } from '../shared/roomcard/roomcard.component';
+import { SharedModule } from '../shared/shared.module';
 
 
 @NgModule({
@@ -13,7 +15,8 @@ import { ManageroomsComponent } from './managerooms/managerooms.component';
   ],
   imports: [
     CommonModule,
-    AdminRoutingModule
+    AdminRoutingModule,
+    SharedModule
   ]
 })
 export class AdminModule { }
