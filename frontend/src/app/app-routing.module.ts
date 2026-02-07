@@ -15,7 +15,7 @@ const routes: Routes = [
     loadChildren: () => import('./customer/customer.module').then(m => m.CustomerModule) 
   },
   { path: '', redirectTo: 'auth/login', pathMatch: 'full' },
-  { path: '**', redirectTo: 'auth/login' } 
+  { path: '**', redirectTo: 'auth/login' } // Handle 404s by redirecting to login
 ];
 
 @NgModule({
