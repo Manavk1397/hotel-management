@@ -1,20 +1,18 @@
-<h2>Admin - Room Management</h2>
-
 <div style="background-color: #f0f0f0; padding: 20px; border-radius: 8px; margin-bottom: 20px;">
-  <p>Room Type: <input type="text" [(ngModel)]="rType" name="roomType" placeholder="e.g. Deluxe"></p>
+  <p>Room Type: <input type="text" #tInput placeholder="e.g. Deluxe"></p>
+  <p>Price: <input type="number" #pInput></p>
   
-  <p>Price: <input type="number" [(ngModel)]="rPrice" name="roomPrice"></p>
-  
-  <button (click)="onUpload()">Upload Room Details</button>
+  <button (click)="onUpload(tInput.value, pInput.value); tInput.value=''; pInput.value=''">
+    Upload Room Details
+  </button>
 </div>
 
-<h3>Current Rooms</h3>
 <div style="display: flex; flex-wrap: wrap;">
-  <div *ngFor="let room of rooms; let i = index" style="text-align: center;">
+  <div *ngFor="let room of rooms">
     <app-roomcard 
       [roomData]="room" 
       buttonLabel="Delete Room" 
-      (cardAction)="deleteRoom(i)">
+      (cardAction)="deleteRoom($event)">
     </app-roomcard>
   </div>
 </div>

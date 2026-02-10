@@ -1,5 +1,6 @@
 import { Component } from '@angular/core';
-import { Room } from '../../models/room.model'; // Import global model
+import { RoomlistComponent } from '../../customer/roomlist/roomlist.component';
+import { Room } from '../../models/room.model';
 
 @Component({
   selector: 'app-managerooms',
@@ -7,42 +8,31 @@ import { Room } from '../../models/room.model'; // Import global model
   styleUrls: ['./managerooms.component.css']
 })
 export class ManageroomsComponent {
-  // Local array of rooms for the admin to manage
-  rooms: Room[] = [
-    { id: 1, type: 'Deluxe Room', price: 2500, count: 5, description: 'AC, Wifi' },
-    { id: 2, type: 'Executive Suite', price: 5000, count: 2, description: 'King Bed' }
-  ];
+  
+  get rooms() {
+    return RoomlistComponent.sharedRooms;
+  }
 
-  // Variables for two-way binding with [(ngModel)]
-  rType: string = '';
-  rPrice: number = 0;
-
-  // Method to add a new room
-  onUpload() {
-    if (this.rType && this.rPrice > 0) {
+  // Using Template Reference Variables instead of ngModel
+  onUpload(type: string, price: string) {
+    const priceNum = parseFloat(price);
+    if (type && priceNum > 0) {
       const newRoom: Room = {
-        id: Date.now(), // Unique ID based on time
-        type: this.rType,
-        price: this.rPrice,
+        id: Date.now(),
+        type: type,
+        price: priceNum,
         count: 1,
         description: 'Newly added by Admin'
       };
-      this.rooms.push(newRoom);
-      alert('Room added successfully!');
-      
-      // Clear inputs after upload
-      this.rType = '';
-      this.rPrice = 0;
-    } else {
-      alert('Please enter valid room details.');
+      // Push directly to the shared static array
+      RoomlistComponent.sharedRooms.push(newRoom);
     }
   }
 
-  // Method to delete a room using its index
-  deleteRoom(index: number) {
-    const confirmed = confirm(`Are you sure you want to delete ${this.rooms[index].type}?`);
-    if (confirmed) {
-      this.rooms.splice(index, 1);
-    }
+  deleteRoom(roomToDelete: Room) {
+    // Filter the shared static array to remove the item
+    RoomlistComponent.sharedRooms = RoomlistComponent.sharedRooms.filter(
+      r => r.id !== roomToDelete.id
+    );
   }
 }
