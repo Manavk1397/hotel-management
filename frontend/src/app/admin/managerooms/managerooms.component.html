@@ -1,6 +1,20 @@
-<div style="border: 1px solid #333; padding: 15px; margin: 10px; border-radius: 8px; width: 250px;">
-  <h3>Room Type: Deluxe</h3>
-  <p>Price: ₹2500</p>
-  <p>Status: Ready to Book</p>
-  <button>Action Button</button>
+<h2>Admin - Room Management</h2>
+
+<div style="background-color: #f0f0f0; padding: 20px; border-radius: 8px; margin-bottom: 20px;">
+  <p>Room Type: <input type="text" [(ngModel)]="rType" name="roomType" placeholder="e.g. Deluxe"></p>
+  
+  <p>Price: <input type="number" [(ngModel)]="rPrice" name="roomPrice"></p>
+  
+  <button (click)="onUpload()">Upload Room Details</button>
+</div>
+
+<h3>Current Rooms</h3>
+<div style="display: flex; flex-wrap: wrap;">
+  <div *ngFor="let room of rooms; let i = index" style="text-align: center;">
+    <app-roomcard 
+      [roomData]="room" 
+      buttonLabel="Delete Room" 
+      (cardAction)="deleteRoom(i)">
+    </app-roomcard>
+  </div>
 </div>
