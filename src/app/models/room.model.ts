@@ -4,5 +4,6 @@ export interface Room {
   price: number;
   count: number;
   description: string;
+  image?: string;
   lastBooked?: string; 
-}
+} 

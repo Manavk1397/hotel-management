@@ -1,15 +1,16 @@
-<div style="background-color: #f0f0f0; padding: 20px; border-radius: 8px; margin-bottom: 20px;">
-  <p>Room Type: <input type="text" [(ngModel)]="rType"></p>
-  <p>Price: <input type="number" [(ngModel)]="rPrice"></p>
-  <button (click)="onUpload()">Upload Room Details</button>
-</div>
+<div style="padding: 20px;">
+  <h2>Admin - Manage Rooms</h2>
+  <div style="background: #f4f4f4; padding: 15px; border-radius: 8px; margin-bottom: 20px;">
+    <input #t placeholder="Room Type">
+    <input #p type="number" placeholder="Price">
+    <input #d placeholder="Description">
+    <input #i placeholder="Image URL">
+    <button (click)="onUpload(t.value, p.value, d.value, i.value); t.value=''; p.value=''; d.value=''; i.value=''">Upload Room</button>
+  </div>
 
-<div style="display: flex; flex-wrap: wrap;">
-  <div *ngFor="let room of hotelService.rooms; let i = index">
-    <app-roomcard 
-      [roomData]="room" 
-      buttonLabel="Delete Room" 
-      (cardAction)="hotelService.deleteRoom(i)">
-    </app-roomcard>
+  <div style="display: flex; flex-wrap: wrap;">
+    <div *ngFor="let room of hotelService.rooms">
+      <app-roomcard [roomData]="room" buttonLabel="Delete" (cardAction)="deleteRoom(room.id)"></app-roomcard>
+    </div>
   </div>
 </div>

@@ -7,23 +7,36 @@ import { Room } from '../../models/room.model';
   templateUrl: './managerooms.component.html'
 })
 export class ManageroomsComponent {
+  // Local variables for basic template binding if needed
   rType = '';
   rPrice = 0;
 
   constructor(public hotelService: HotelService) {}
 
-  onUpload() {
-    if (this.rType && this.rPrice > 0) {
+  onUpload(type: string, price: string, desc: string, imgUrl: string): void {
+    const priceNum = parseFloat(price); 
+    
+    if (type && priceNum > 0) {
       const newRoom: Room = {
         id: Date.now(),
-        type: this.rType,
-        price: this.rPrice,
-        count: 1,
-        description: 'Added by Admin'
+        type: type,
+        price: priceNum,
+        count: 1, 
+        description: desc, 
+        image: imgUrl 
       };
-      this.hotelService.addRoom(newRoom);
-      this.rType = '';
-      this.rPrice = 0;
+      
+      this.hotelService.addRoom(newRoom); 
+      alert('Room added successfully!');
     }
+
+    
+    this.rType = '';
+    this.rPrice = 0;
+  }
+
+  
+  deleteRoom(roomId: number): void {
+    this.hotelService.deleteRoom(roomId);
   }
 }
