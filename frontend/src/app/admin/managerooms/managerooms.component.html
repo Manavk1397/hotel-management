@@ -1,5 +1,19 @@
-<div *ngFor="let room of hotelService.rooms"> <app-roomcard 
-    [roomData]="room" 
-    buttonLabel="Delete Room" 
-    (cardAction)="deleteRoom(room.id)"> </app-roomcard>
+<div style="padding: 20px; background-color: #f4f4f4; margin-bottom: 20px;">
+  <h3>Admin: Upload Room Details</h3>
+  <input type="text" #typeInput placeholder="Room Type">
+  <input type="number" #priceInput placeholder="Price">
+  <button (click)="onUpload(typeInput.value, priceInput.value); typeInput.value=''; priceInput.value=''">
+    Upload Room
+  </button>
+</div>
+
+<h3>Current Room Inventory</h3>
+<div style="display: flex; flex-wrap: wrap;">
+  <div *ngFor="let room of hotelService.rooms">
+    <app-roomcard 
+      [roomData]="room" 
+      buttonLabel="Delete Room" 
+      (cardAction)="deleteRoom(room.id)">
+    </app-roomcard>
+  </div>
 </div>

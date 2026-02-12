@@ -7,12 +7,13 @@ import { Room } from '../../models/room.model';
   templateUrl: './roomlist.component.html'
 })
 export class RoomlistComponent {
-  // Inject the service to access rooms and history
   constructor(public hotelService: HotelService) {}
 
   onBook(room: Room) {
     if (this.hotelService.bookRoom(room.id)) {
-      alert(`Success! Booked ${room.type} at ${room.lastBooked}`);
+      alert(`Success! Booked ${room.type} at ${room.lastBooked}`); // Timestamp confirmation
+    } else {
+      alert('Room is currently sold out.');
     }
   }
 }
