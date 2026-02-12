@@ -1,10 +1,9 @@
 <h2>Available Rooms</h2>
-
 <div style="display: flex; flex-wrap: wrap;">
   <app-roomcard 
-    *ngFor="let room of rooms; let i = index" 
+    *ngFor="let room of hotelService.rooms" 
     [roomData]="room" 
     buttonLabel="Book Now"
-    (cardAction)="bookRoom(i)">
+    (cardAction)="hotelService.bookRoom(room.id)">
   </app-roomcard>
 </div>

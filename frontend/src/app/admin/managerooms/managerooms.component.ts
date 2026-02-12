@@ -1,38 +1,28 @@
 import { Component } from '@angular/core';
-import { RoomlistComponent } from '../../customer/roomlist/roomlist.component';
+import { HotelService } from '../../shared/hotel.service';
 import { Room } from '../../models/room.model';
 
 @Component({
   selector: 'app-managerooms',
-  templateUrl: './managerooms.component.html',
-  styleUrls: ['./managerooms.component.css']
+  templateUrl: './managerooms.component.html' // Ensure this path is correct
 })
 export class ManageroomsComponent {
-  
-  get rooms() {
-    return RoomlistComponent.sharedRooms;
-  }
+  // Inject the service as public to use 'hotelService.rooms' in the template
+  constructor(public hotelService: HotelService) {}
 
-  // Using Template Reference Variables instead of ngModel
   onUpload(type: string, price: string) {
-    const priceNum = parseFloat(price);
-    if (type && priceNum > 0) {
-      const newRoom: Room = {
-        id: Date.now(),
-        type: type,
-        price: priceNum,
-        count: 1,
-        description: 'Newly added by Admin'
-      };
-      // Push directly to the shared static array
-      RoomlistComponent.sharedRooms.push(newRoom);
-    }
+    const newRoom: Room = {
+      id: Date.now(),
+      type: type,
+      price: parseFloat(price),
+      count: 1,
+      description: 'Added by Admin'
+    };
+    this.hotelService.addRoom(newRoom);
   }
 
-  deleteRoom(roomToDelete: Room) {
-    // Filter the shared static array to remove the item
-    RoomlistComponent.sharedRooms = RoomlistComponent.sharedRooms.filter(
-      r => r.id !== roomToDelete.id
-    );
+  // Template was looking for deleteRoom; we map it to the service method
+  deleteRoom(roomId: number) {
+    this.hotelService.deleteRoom(roomId);
   }
 }

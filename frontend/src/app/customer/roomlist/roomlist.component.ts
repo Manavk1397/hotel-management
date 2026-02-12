@@ -1,31 +1,18 @@
 import { Component } from '@angular/core';
+import { HotelService } from '../../shared/hotel.service';
 import { Room } from '../../models/room.model';
 
 @Component({
   selector: 'app-roomlist',
-  templateUrl: './roomlist.component.html',
-  styleUrls: ['./roomlist.component.css']
+  templateUrl: './roomlist.component.html'
 })
 export class RoomlistComponent {
-  // Static array ensures data is shared across all instances and components
-  static sharedRooms: Room[] = [
-    { id: 1, type: 'Deluxe Room', price: 2500, count: 5, description: 'AC, Wifi' },
-    { id: 2, type: 'Executive Suite', price: 5000, count: 2, description: 'King Bed' }
-  ];
+  // Inject the service to access rooms and history
+  constructor(public hotelService: HotelService) {}
 
-  static historyData: Room[] = []; 
-
-  get rooms() {
-    return RoomlistComponent.sharedRooms;
-  }
-
-  bookRoom(index: number) {
-    const targetRoom = RoomlistComponent.sharedRooms[index];
-    if (targetRoom.count > 0) {
-      targetRoom.count--;
-      targetRoom.lastBooked = new Date().toLocaleString();
-      RoomlistComponent.historyData.push({ ...targetRoom });
-      alert(`Booking Successful for ${targetRoom.type}!`);
+  onBook(room: Room) {
+    if (this.hotelService.bookRoom(room.id)) {
+      alert(`Success! Booked ${room.type} at ${room.lastBooked}`);
     }
   }
 }
