@@ -1,15 +1,16 @@
 <div style="padding: 20px;">
   <h2>Your Booking History</h2>
-  <table *ngIf="myBookings.length > 0" border="1" style="width: 100%; border-collapse: collapse;">
-    <tr style="background-color: #eee;">
+  <table border="1" style="width: 100%;" *ngIf="history.length > 0">
+    <tr>
       <th>Room Type</th>
       <th>Price</th>
-      <th>Time of Booking</th>
+      <th>Booking Time</th>
     </tr>
-    <tr *ngFor="let b of myBookings">
-      <td>{{ b.type }}</td>
-      <td>₹{{ b.price }}</td>
-      <td>{{ b.lastBooked }}</td> </tr>
+    <tr *ngFor="let item of history">
+      <td>{{ item.type }}</td>
+      <td>₹{{ item.price }}</td>
+      <td>{{ item.lastBooked }}</td>
+    </tr>
   </table>
-  <p *ngIf="myBookings.length === 0">No rooms booked yet.</p>
+  <p *ngIf="history.length === 0">No bookings yet.</p>
 </div>

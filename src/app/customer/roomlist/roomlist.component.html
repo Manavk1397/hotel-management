@@ -4,6 +4,6 @@
     *ngFor="let room of hotelService.rooms" 
     [roomData]="room" 
     buttonLabel="Book Now"
-    (cardAction)="hotelService.bookRoom(room.id)">
+    (cardAction)="onBook(room.id)">
   </app-roomcard>
 </div>

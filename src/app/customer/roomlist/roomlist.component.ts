@@ -1,6 +1,5 @@
 import { Component } from '@angular/core';
 import { HotelService } from '../../shared/hotel.service';
-import { Room } from '../../models/room.model';
 
 @Component({
   selector: 'app-roomlist',
@@ -9,11 +8,9 @@ import { Room } from '../../models/room.model';
 export class RoomlistComponent {
   constructor(public hotelService: HotelService) {}
 
-  onBook(room: Room) {
-    if (this.hotelService.bookRoom(room.id)) {
-      alert(`Success! Booked ${room.type} at ${room.lastBooked}`); // Timestamp confirmation
-    } else {
-      alert('Room is currently sold out.');
+  onBook(roomId: number) {
+    if (this.hotelService.bookRoom(roomId)) {
+      alert('Room booked successfully!');
     }
   }
 }
