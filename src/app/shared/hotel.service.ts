@@ -22,22 +22,43 @@ export class HotelService {
     }
   ];
   bookingHistory: Room[] = [];
+
+  // Logic to add or merge rooms
   addRoom(newRoom: Room) {
-    this.rooms.push(newRoom);
-  }
-
-  deleteRoom(roomId: number) {
-    this.rooms = this.rooms.filter(r => r.id !== roomId); 
-  }
-
-  bookRoom(roomId: number) {
-    const room = this.rooms.find(r => r.id === roomId);
-    if (room && room.count > 0) {
-      room.count--;
-      room.lastBooked = new Date().toLocaleString();
-      this.bookingHistory.push({ ...room });
-      return true;
+    const existing = this.rooms.find(r => r.type.toLowerCase() === newRoom.type.toLowerCase());
+    if (existing) {
+      existing.count += newRoom.count; // Increase count if name exists
+    } else {
+      this.rooms.push(newRoom);
     }
-    return false;
   }
+
+  // Selective deletion
+  deleteRoomQuantity(roomId: number, quantity: number) {
+    const room = this.rooms.find(r => r.id === roomId);
+    if (room) {
+      room.count -= quantity;
+      if (room.count <= 0) {
+        this.rooms = this.rooms.filter(r => r.id !== roomId);
+      }
+    }
+  }
+
+  // Booking with check-in/out
+bookRoom(roomId: number, checkIn: string, checkOut: string): boolean {
+  const room = this.rooms.find(r => r.id === roomId);
+  if (room && room.count > 0) {
+    room.count--;
+    // Store booking details with dates in history
+    const bookingEntry = { 
+      ...room, 
+      checkIn, 
+      checkOut, 
+      lastBooked: new Date().toLocaleString() 
+    };
+    this.bookingHistory.push(bookingEntry);
+    return true;
+  }
+  return false;
+}
 }

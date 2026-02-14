@@ -9,7 +9,7 @@ import { Room } from '../../models/room.model';
 export class HistoryComponent implements OnInit {
   history: Room[] = [];
 
-  constructor(private hotelService: HotelService) {}
+  constructor(public hotelService: HotelService) {}
 
   ngOnInit() {
     this.history = this.hotelService.bookingHistory;

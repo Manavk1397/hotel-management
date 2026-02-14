@@ -6,4 +6,6 @@ export interface Room {
   description: string;
   image?: string;
   lastBooked?: string; 
+  checkIn?: string;  
+  checkOut?: string;
 } 
