@@ -1,5 +1,5 @@
 <div style="display: flex; flex-wrap: wrap; gap: 20px; padding: 20px;">
-  <div *ngFor="let room of hotelService.rooms">
+  <div *ngFor="let room of rooms">
     <app-roomcard [roomData]="room" buttonLabel="Select Dates Below"></app-roomcard>
     
     <div *ngIf="room.count > 0" style="padding: 10px; background: #f0f0f0; border-radius: 4px; margin-top: -10px;">

@@ -1,5 +1,6 @@
 import { Component } from '@angular/core';
 import { Router } from '@angular/router';
+import { HotelService } from 'src/app/shared/hotel.service';
 
 @Component({
   selector: 'app-register',
@@ -7,12 +8,14 @@ import { Router } from '@angular/router';
   styleUrls: ['./register.component.css']
 })
 export class RegisterComponent {
-constructor(private router: Router) {} 
+constructor(private router: Router, private hotelService: HotelService) {}
 
-  onRegister(form: any) {
-    if (form.valid) {
-      alert('Registration Successful! Redirecting to login...');
-      this.router.navigate(['/auth/login']);
-    }
+onRegister(form: any) {
+  if (form.valid) {
+    this.hotelService.register(form.value).subscribe({
+      next: () => this.router.navigate(['/auth/login']),
+      error: () => alert('Registration failed')
+    });
   }
+}
 }

@@ -19,7 +19,7 @@
 
   <h3>Current Room Inventory</h3>
   <div style="display: flex; flex-wrap: wrap; gap: 20px;">
-    <div *ngFor="let room of hotelService.rooms" style="border: 1px solid #ddd; padding: 10px; border-radius: 8px; width: 270px;">
+    <div *ngFor="let room of rooms" style="border: 1px solid #ddd; padding: 10px; border-radius: 8px; width: 270px;">
       <app-roomcard 
         [roomData]="room" 
         buttonLabel="Manage Qty Below">
