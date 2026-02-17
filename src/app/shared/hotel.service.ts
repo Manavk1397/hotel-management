@@ -5,7 +5,7 @@ import { Observable } from 'rxjs';
 
 @Injectable({ providedIn: 'root' })
 export class HotelService {
-  private readonly API_URL = 'https://pyrenocarpous-emilio-artistically.ngrok-free.dev/api'; // Updated to ngrok URL
+  private readonly API_URL = 'https://pyrenocarpous-emilio-artistically.ngrok-free.dev/api'; 
 
   constructor(private http: HttpClient) {}
   getRooms(): Observable<Room[]> {

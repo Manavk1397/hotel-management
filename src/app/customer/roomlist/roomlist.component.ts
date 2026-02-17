@@ -1,5 +1,4 @@
-// src/app/customer/roomlist/roomlist.component.ts
-import { Component, OnInit } from '@angular/core'; // Added OnInit
+import { Component, OnInit } from '@angular/core'; 
 import { HotelService } from '../../shared/hotel.service';
 import { Room } from '../../models/room.model';
 
@@ -8,7 +7,7 @@ import { Room } from '../../models/room.model';
   templateUrl: './roomlist.component.html'
 })
 export class RoomlistComponent implements OnInit {
-  rooms: Room[] = []; // Local array for API data
+  rooms: Room[] = []; 
 
   constructor(public hotelService: HotelService) {}
 
@@ -31,7 +30,7 @@ export class RoomlistComponent implements OnInit {
     this.hotelService.bookRoom(room.id, checkIn, checkOut).subscribe({
       next: (success) => {
         alert(`Booking Confirmed!\nRoom: ${room.type}\nCheck-in: ${checkIn}\nCheck-out: ${checkOut}`);
-        this.loadRooms(); // Refresh to show updated room counts
+        this.loadRooms(); 
       },
       error: () => alert("Error: Room is no longer available.")
     });

@@ -1,5 +1,4 @@
-// src/app/admin/managerooms/managerooms.component.ts
-import { Component, OnInit } from '@angular/core'; // Added OnInit
+import { Component, OnInit } from '@angular/core';
 import { HotelService } from '../../shared/hotel.service';
 import { Room } from '../../models/room.model';
 
@@ -8,12 +7,12 @@ import { Room } from '../../models/room.model';
   templateUrl: './managerooms.component.html'
 })
 export class ManageroomsComponent implements OnInit {
-  rooms: Room[] = []; // Local array to hold API data
+  rooms: Room[] = []; 
 
   constructor(public hotelService: HotelService) {}
 
   ngOnInit(): void {
-    this.loadRooms(); // Fetch rooms on load
+    this.loadRooms(); 
   }
 
   loadRooms(): void {
@@ -38,14 +37,14 @@ export class ManageroomsComponent implements OnInit {
       
       this.hotelService.addRoom(newRoom).subscribe(() => {
         alert('Inventory Updated Successfully!');
-        this.loadRooms(); // Refresh list after adding
+        this.loadRooms(); 
       });
     }
   }
 
   deleteQty(roomId: number, qty: string): void {
     this.hotelService.deleteRoomQuantity(roomId, parseInt(qty)).subscribe(() => {
-      this.loadRooms(); // Refresh list after deleting
+      this.loadRooms(); 
     });
   }
 }

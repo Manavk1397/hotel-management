@@ -4,8 +4,6 @@ import { NavbarComponent } from './navbar/navbar.component';
 import { FooterComponent } from './footer/footer.component';
 import { RoomcardComponent } from './roomcard/roomcard.component';
 
-
-
 @NgModule({
   declarations: [
     NavbarComponent,
