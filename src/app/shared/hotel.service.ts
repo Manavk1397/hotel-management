@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import { Room } from '../models/room.model';
-import { HttpClient } from '@angular/common/http'; 
-import { Observable } from 'rxjs'; 
+import { HttpClient, HttpHeaders } from '@angular/common/http'; 
+import { Observable, reduce } from 'rxjs'; 
 
 @Injectable({ providedIn: 'root' })
 export class HotelService {
@@ -11,22 +11,64 @@ export class HotelService {
   getRooms(): Observable<Room[]> {
     return this.http.get<Room[]>(`${this.API_URL}/rooms`);
   }
-
+  addRoom(newRoom: Room): Observable<Room> {
+  return this.http.post<Room>(
+    `${this.API_URL}/rooms`,
+    newRoom,
+    {
+      headers: {
+        'role': localStorage.getItem('role') || ''
+      }
+    }
+  );
+}
+/*
   addRoom(newRoom: Room): Observable<Room> {
     return this.http.post<Room>(`${this.API_URL}/rooms`, newRoom);
   }
-
+*/
+deleteRoomQuantity(roomId: number, quantity: number): Observable<any> {
+  return this.http.patch(
+    `${this.API_URL}/rooms/${roomId}/reduce`,
+    { quantity },
+    {
+      headers: {
+        'role': localStorage.getItem('role') || ''
+      }
+    }
+  );
+}
+/*
   deleteRoomQuantity(roomId: number, quantity: number): Observable<any> {
     return this.http.patch(`${this.API_URL}/rooms/${roomId}/reduce`, { quantity });
   }
-
+*/
+deleteRoom(roomId: number): Observable<any> {
+  return this.http.delete(
+    `${this.API_URL}/rooms/${roomId}`,
+    {
+      headers: {
+        'role': localStorage.getItem('role') || ''
+      }
+    }
+  );
+}
+/*
   deleteRoom(roomId: number): Observable<any> {
     return this.http.delete(`${this.API_URL}/rooms/${roomId}`);
   }
-
+    */
+/*
   bookRoom(roomId: number, checkIn: string, checkOut: string): Observable<any> {
     const bookingData = { roomId, checkIn, checkOut };
     return this.http.post(`${this.API_URL}/bookings`, bookingData);
+  }
+*/
+
+  bookRoom(roomId: number, checkIn: string, checkOut: string): Observable<any> {
+  const headers = new HttpHeaders({ 'ngrok-skip-browser-warning': 'true' });
+  const bookingPayload = { checkIn, checkOut }; // RoomId goes in the URL, not the body
+  return this.http.post(`${this.API_URL}/bookings/${roomId}`, bookingPayload, { headers });
   }
 
   getBookingHistory(): Observable<any[]> {

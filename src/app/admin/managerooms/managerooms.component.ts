@@ -26,6 +26,7 @@ export class ManageroomsComponent implements OnInit {
     const qtyNum = parseInt(qty) || 1;
     
     if (type && priceNum > 0) {
+      /*
       const newRoom: Room = {
         id: Date.now(),
         type: type,
@@ -34,7 +35,14 @@ export class ManageroomsComponent implements OnInit {
         description: desc,
         image: img
       };
-      
+      */
+     const newRoom: any = { // Use any or update Room model to make id optional
+  type: type,
+  price: priceNum,
+  count: qtyNum,
+  description: desc,
+  image: img
+};
       this.hotelService.addRoom(newRoom).subscribe(() => {
         alert('Inventory Updated Successfully!');
         this.loadRooms(); 
