@@ -15,6 +15,8 @@ export class LoginComponent {
   onLogin() {
   this.hotelService.login({ email: this.email, password: this.password }).subscribe({
     next: (user) => {
+      localStorage.setItem('userId', user.id.toString());
+      localStorage.setItem('role', user.role);
       user.role === 'admin' 
         ? this.router.navigate(['/admin/manage-rooms']) 
         : this.router.navigate(['/customer/rooms']);

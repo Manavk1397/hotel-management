@@ -26,17 +26,8 @@ export class ManageroomsComponent implements OnInit {
     const qtyNum = parseInt(qty) || 1;
     
     if (type && priceNum > 0) {
-      /*
-      const newRoom: Room = {
-        id: Date.now(),
-        type: type,
-        price: priceNum,
-        count: qtyNum,
-        description: desc,
-        image: img
-      };
-      */
-     const newRoom: any = { // Use any or update Room model to make id optional
+
+     const newRoom: any = { 
   type: type,
   price: priceNum,
   count: qtyNum,
