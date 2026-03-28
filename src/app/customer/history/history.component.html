@@ -1,0 +1,27 @@
+<div class="container mt-4">
+  <h2>Your Booking History</h2>
+
+  <div *ngIf="isLoading" class="text-center">
+    <p>Loading history...</p>
+  </div>
+
+  <div *ngIf="!isLoading && bookingHistory.length === 0" class="alert alert-info">
+    No bookings found.
+  </div>
+
+  <div *ngIf="!isLoading && bookingHistory.length > 0" class="row">
+    <div class="col-md-12" *ngFor="let booking of bookingHistory">
+      <div class="card mb-3 shadow-sm">
+        <div class="card-body">
+          <h5 class="card-title">{{ booking.type }}</h5>
+          <p class="card-text">
+            <strong>Check-In:</strong> {{ booking.checkIn }} <br>
+            <strong>Check-Out:</strong> {{ booking.checkOut }} <br>
+            <strong>Price Paid:</strong> ₹{{ booking.price }}
+          </p>
+          <small class="text-muted">Booked on: {{ booking.lastBooked }}</small>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

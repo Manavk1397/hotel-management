@@ -1,0 +1,15 @@
+<div style="display: flex; flex-wrap: wrap; gap: 20px; padding: 20px;">
+  <div *ngFor="let room of rooms">
+    <app-roomcard [roomData]="room" buttonLabel="Select Dates Below"></app-roomcard>
+    
+    <div *ngIf="room.count > 0" style="padding: 10px; background: #f0f0f0; border-radius: 4px; margin-top: -10px;">
+      <p>Check-In: <input #cIn type="date" style="width: 100%; margin-bottom: 5px;"></p>
+      <p>Check-Out: <input #cOut type="date" style="width: 100%; margin-bottom: 10px;"></p>
+      
+      <button (click)="onConfirmBooking(room, cIn.value, cOut.value)" 
+        style="width: 100%; padding: 10px; background-color: #28a745; color: white; border: none; border-radius: 4px; cursor: pointer; font-weight: bold;">
+        Confirm Booking
+      </button>
+    </div>
+  </div>
+</div>

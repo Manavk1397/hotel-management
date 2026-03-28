@@ -1,0 +1,37 @@
+<div style="padding: 20px; font-family: Arial, sans-serif;">
+  <h2>Admin - Manage Rooms</h2>
+
+  <div style="background-color: #f9f9f9; padding: 20px; border-radius: 8px; border: 1px solid #ddd; margin-bottom: 30px; max-width: 500px;">
+    <h3>Add or Update Room</h3>
+    <p>Room Type: <input type="text" #tInput placeholder="e.g. Deluxe Suite" style="width: 100%; margin-bottom: 10px;"></p>
+    <p>Price (₹): <input type="number" #pInput placeholder="e.g. 3500" style="width: 100%; margin-bottom: 10px;"></p>
+    <p>Description: <input type="text" #dInput placeholder="e.g. AC, Wifi" style="width: 100%; margin-bottom: 10px;"></p>
+    <p>Quantity: <input type="number" #qInput placeholder="Quantity to add" style="width: 100%; margin-bottom: 10px;"></p>
+    <p>Photo URL: <input type="text" #iInput placeholder="link-to-photo.jpg" style="width: 100%; margin-bottom: 10px;"></p>
+    
+    <button (click)="onUpload(tInput.value, pInput.value, dInput.value, qInput.value, iInput.value); tInput.value=''; pInput.value=''; dInput.value=''; qInput.value=''; iInput.value=''"
+      style="background-color: #28a745; color: white; padding: 10px 15px; border: none; border-radius: 4px; cursor: pointer;">
+      Upload/Merge Room
+    </button>
+  </div>
+
+  <hr>
+
+  <h3>Current Room Inventory</h3>
+  <div style="display: flex; flex-wrap: wrap; gap: 20px;">
+    <div *ngFor="let room of rooms" style="border: 1px solid #ddd; padding: 10px; border-radius: 8px; width: 270px;">
+      <app-roomcard 
+        [roomData]="room" 
+        buttonLabel="Manage Qty Below">
+      </app-roomcard>
+
+      <div style="margin-top: 10px; padding-top: 10px; border-top: 1px solid #eee;">
+        <label>Delete Quantity:</label>
+        <input #delQ type="number" value="1" style="width: 50px; margin: 0 5px;">
+        <button (click)="deleteQty(room.id, delQ.value)" style="background-color: #dc3545; color: white; border: none; padding: 5px 10px; border-radius: 4px; cursor: pointer;">
+          Delete Qty
+        </button>
+      </div>
+    </div>
+  </div>
+</div>

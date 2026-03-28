@@ -1,0 +1,16 @@
+<div style="padding: 20px; border: 1px solid #ccc; width: 300px; margin: auto; margin-top: 50px;">
+  <h2>Hotel Login</h2>
+  <form #loginForm="ngForm">
+    <p>Email: <br>
+      <input type="email" name="email" [(ngModel)]="email" required email #logEmail="ngModel">
+      <span *ngIf="logEmail.invalid && logEmail.touched" style="color: red; font-size: 12px;"><br>Please enter a valid email</span>
+    </p>
+    
+    <p>Password: <br>
+      <input type="password" name="password" [(ngModel)]="password" required #logPass="ngModel">
+      <span *ngIf="logPass.invalid && logPass.touched" style="color: red; font-size: 12px;"><br>Password is required</span>
+    </p>
+    
+    <button type="button" (click)="onLogin()" [disabled]="loginForm.invalid">Login</button>
+  </form>
+</div>
